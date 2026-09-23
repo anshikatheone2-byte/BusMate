@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #100743;
+  --color-surface-dim: #100743;
+  --color-surface-bright: #37326a;
+  --color-surface-container-lowest: #0b013e;
+  --color-surface-container-low: #19114b;
+  --color-surface-container: #1d164f;
+  --color-surface-container-high: #28225a;
+  --color-surface-container-highest: #332d65;
+  --color-on-surface: #e4dfff;
+  --color-on-surface-variant: #ccc3d8;
+  --color-inverse-surface: #e4dfff;
+  --color-inverse-on-surface: #2e2861;
+  --color-outline: #958da1;
+  --color-outline-variant: #4a4455;
+  --color-surface-tint: #d2bcff;
+  --color-primary: #d2bcff;
+  --color-on-primary: #3e008e;
+  --color-primary-container: #8b4dff;
+  --color-on-primary-container: #fffeff;
+  --color-inverse-primary: #732ee6;
+  --color-secondary: #b5c4ff;
+  --color-on-secondary: #00297a;
+  --color-secondary-container: #0055ea;
+  --color-on-secondary-container: #d8dfff;
+  --color-secondary-fixed: #dbe1ff;
+  --color-secondary-fixed-dim: #b5c4ff;
+  --color-tertiary: #ffb693;
+  --color-on-tertiary: #562000;
+  --color-tertiary-container: #be581e;
+  --color-on-tertiary-container: #fffeff;
+  --color-tertiary-fixed: #ffdbcb;
+  --color-tertiary-fixed-dim: #ffb693;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-background: #100743;
+  --color-on-background: #e4dfff;
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #100743;
+    color: #e4dfff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.font-headline-lg {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.font-headline-md {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.font-headline-sm {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.font-body-lg {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+.font-body-md {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+.font-body-sm {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+}
+.font-label-lg {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+.font-label-md {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.font-label-sm {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* Leaflet Dark Theme Overrides for BusMate */
+.leaflet-container {
+  background-color: #080227 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #19114b !important;
+  color: #e4dfff !important;
+  border-color: #28225a !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #28225a !important;
+  color: #ffffff !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #19114b !important;
+  color: #e4dfff !important;
+  border: 1px solid #28225a !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 10px 14px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  background: #19114b !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(11, 1, 62, 0.7) !important;
+  color: #958da1 !important;
+  font-size: 9px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #b5c4ff !important;
+}

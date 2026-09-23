@@ -1,0 +1,10 @@
+{
+  "name": "Remix BusMate: Crowd-Powered Smart Bus Tracking",
+  "description": "Crowd-Powered Smart Bus Tracking with real-time passenger pings, confidence indicators, and corridor monitoring.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

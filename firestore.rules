@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidPhoneSignal(data) {
+      return data.keys().hasAll([
+        'anonymousId', 'latitude', 'longitude', 'speedKmh', 'directionDeg',
+        'waitingTimeSeconds', 'distanceFromRouteMeters', 'directionDiffDeg',
+        'isNearStop', 'isGroupedWithBus', 'timestamp', 'routeId'
+      ]) &&
+      data.keys().hasOnly([
+        'anonymousId', 'latitude', 'longitude', 'speedKmh', 'directionDeg',
+        'waitingTimeSeconds', 'distanceFromRouteMeters', 'directionDiffDeg',
+        'isNearStop', 'isGroupedWithBus', 'timestamp', 'routeId'
+      ]) &&
+      data.anonymousId is string &&
+      data.anonymousId.size() <= 64 &&
+      data.anonymousId.matches('^anon_[a-zA-Z0-9_\\-]+$') &&
+      data.latitude is number &&
+      data.longitude is number &&
+      data.speedKmh is number &&
+      data.directionDeg is number &&
+      data.waitingTimeSeconds is number &&
+      data.distanceFromRouteMeters is number &&
+      data.directionDiffDeg is number &&
+      data.isNearStop is bool &&
+      data.isGroupedWithBus is bool &&
+      data.timestamp is number &&
+      data.routeId is string &&
+      data.routeId.size() <= 64;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Health check test connection document
+    match /test/{testId} {
+      allow read: if isValidId(testId);
+    }
+
+    // Public crowdsourced anonymous phone signals collection
+    match /phone_signals/{signalId} {
+      allow read: if true;
+      allow create: if isValidId(signalId) && isValidPhoneSignal(request.resource.data);
+      allow update: if isValidId(signalId) && isValidPhoneSignal(request.resource.data);
+      allow delete: if isValidId(signalId);
+    }
+  }
+}

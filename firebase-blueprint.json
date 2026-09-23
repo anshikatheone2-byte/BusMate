@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "PhoneSignal": {
+      "title": "PhoneSignal",
+      "type": "object",
+      "description": "Anonymized real-time phone GPS ping broadcast along the bus route. Strictly contains NO names, personal identities, or device hardware models.",
+      "properties": {
+        "anonymousId": {
+          "type": "string",
+          "description": "Hashed anonymous identifier for the transmitting device (e.g. anon_a1b2c3d4).",
+          "pattern": "^anon_[a-zA-Z0-9_\\-]+$"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Geographic latitude of the device ping"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Geographic longitude of the device ping"
+        },
+        "speedKmh": {
+          "type": "number",
+          "description": "Instantaneous transit speed in km/h"
+        },
+        "directionDeg": {
+          "type": "number",
+          "description": "Compass bearing in degrees (0-360)"
+        },
+        "waitingTimeSeconds": {
+          "type": "number",
+          "description": "Dwell time in seconds spent stopped near a bus stop"
+        },
+        "distanceFromRouteMeters": {
+          "type": "number",
+          "description": "Perpendicular distance in meters from designated transit corridor centerline"
+        },
+        "directionDiffDeg": {
+          "type": "number",
+          "description": "Angular delta between phone movement vector and route road direction"
+        },
+        "isNearStop": {
+          "type": "boolean",
+          "description": "Whether device is within 50m of a scheduled transit stop"
+        },
+        "isGroupedWithBus": {
+          "type": "boolean",
+          "description": "Whether device is clustered with the bus vehicle"
+        },
+        "timestamp": {
+          "type": "number",
+          "description": "Unix millisecond timestamp of signal transmission"
+        },
+        "routeId": {
+          "type": "string",
+          "description": "Bus route identifier (e.g. route_21a)"
+        }
+      },
+      "required": [
+        "anonymousId",
+        "latitude",
+        "longitude",
+        "speedKmh",
+        "directionDeg",
+        "waitingTimeSeconds",
+        "distanceFromRouteMeters",
+        "directionDiffDeg",
+        "isNearStop",
+        "isGroupedWithBus",
+        "timestamp",
+        "routeId"
+      ]
+    },
+    "HealthCheck": {
+      "title": "HealthCheck",
+      "type": "object",
+      "description": "Connection test document to verify Firestore availability on boot.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Health status string"
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/test/{testId}": {
+      "schema": "HealthCheck",
+      "description": "Connection validation document tested on boot."
+    },
+    "/phone_signals/{signalId}": {
+      "schema": "PhoneSignal",
+      "description": "Ephemeral crowdsourced transit signals, automatically cleaned up when older than 10 minutes."
+    }
+  }
+}
